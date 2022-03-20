@@ -25,6 +25,20 @@ public:
 	{
 		return this->x != other_point.x || this->y != other_point.y;
 	}
+
+	Point operator + (Point& other_point)
+	{
+		this->x += other_point.x;
+		this->y += other_point.y;
+		return *this;
+	}
+
+	Point operator++()
+	{
+		this->x++;
+		this->y++;
+		return *this;
+	}
 	//Getters and Setters
 	int GetX()
 	{
@@ -104,13 +118,20 @@ int main()
 	myClass a(5);
 	myClass b(6);
 	a = b;
+
+
 	int Ball_x = 3, Ball_y = 9;
 	int goal_x = 3, goal_y = 9;
+	int f_x = 5, f_y = 6;
 	Point Ball(Ball_x, Ball_y);
 	Point goal(goal_x, goal_y);
-	bool result =  Ball == goal;
+	Point f(f_x, f_y);
+	bool result = Ball == goal;
 	bool result2 = Ball != goal;
 	std::cout << result << '\n';
 	std::cout << result2 << '\n';
+
+	Point sum = Ball + goal + f;
+	std::cout << sum.GetX() << " " << sum.GetY() << '\n';
 	return 0;
 }
