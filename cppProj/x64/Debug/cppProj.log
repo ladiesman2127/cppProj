@@ -1,2 +1,3 @@
 ﻿  cppProj.cpp
+C:\Users\Abstergo\source\repos\cppProj\cppProj\cppProj.cpp(200,11): warning C4834: отмена возвращаемого значения функции с атрибутом "nodiscard"
   cppProj.vcxproj -> C:\Users\Abstergo\source\repos\cppProj\x64\Debug\cppProj.exe

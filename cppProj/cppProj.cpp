@@ -1,8 +1,11 @@
 ﻿#include <iostream>
 #include <cmath>
+#include <functional>
 #include <vector>
 
-class Point
+class apple;
+
+class point
 {
 	//Fields
 	int x = 0;
@@ -10,38 +13,38 @@ class Point
 public:
 
 	//Constructor
-	Point(int x, int y)
+	point(int x, int y)
 	{
 		this->x = x;
 		this->y = y;
 		std::cout << "Конструктор\t" << this << '\n';
 	}
 
-	Point(Point& other_point)
+	point(point& other_point)
 	{
 		this->x = other_point.x;
 		this->y = other_point.y;
 		std::cout << "Конструктор копирования\t" << this << '\n';
 	}
-	~Point()
+	~point()
 	{
 		std::cout << "Деструктор\t" << this << '\n';
 	}
 	//Operators
-	bool operator == (const Point& other_point)
+	bool operator == (const point& other_point)
 	{
 		std::cout << "==\t\n";
 		return this->x == other_point.x && this->y == other_point.y;
 
 	}
 
-	bool operator != (const Point& other_point)
+	bool operator != (const point& other_point)
 	{
 		std::cout << "!=\t\n";
 		return this->x != other_point.x || this->y != other_point.y;
 	}
 
-	Point& operator + (const Point& other_point)
+	point& operator + (const point& other_point)
 	{
 		std::cout << "+\t" << this << '\n';
 		this->x += other_point.x;
@@ -49,19 +52,27 @@ public:
 		return *this;
 	}
 
-	Point& operator ++()
+	point& operator ++()
 	{
 		std::cout << "prefix++\t" << this << '\n';
 		this->x++;
 		this->y++;
 		return *this;
 	}
-	Point& operator ++(int value)
+	point& operator ++(int value)
 	{
 		std::cout << "postfix+++\t" << this << '\n';
-		Point temp(*this);
+		point temp(*this);
 		this->x++;
 		this->y++;
+		return temp;
+	}
+
+	point& operator --(int val)
+	{
+		point temp(*this);
+		this->x--;
+		this->y--;
 		return temp;
 	}
 	//Getters and Setters
@@ -82,12 +93,15 @@ public:
 		this->y = y;
 	}
 		//Methods
-	static void Print()
+	void Print()
 	{
-		std::cout << "Print()\n";
+		std::cout << "Print()\n" << this->x <<this->y;
 	}
 
+	friend void change_x(point& val);
+
 };
+
 class myClass
 {
 	//Fields
@@ -136,34 +150,106 @@ public:
 	}
 
 };
-class testClass
+
+class test_class
 {
-	int ar[]{1,872,9,22,4};
+	int ar[5]{ 1,872,9,22,4 };
+public:
+	int& operator[](const int& index)
+	{
+		return ar[index];
+	}
 
 };
+
+class my_class
+{
+public:
+	my_class();
+
+	~my_class() = default;
+
+	static void print_msg();
+};
+
+my_class::my_class()
+= default;
+
+void my_class::print_msg()
+{
+	std::cout << "GG\n";
+}
+
+void change_x(point& val)
+{
+	val.x = -1;
+	val.y = -1;
+}
+
+
+class Apple;
+
+class human
+{
+public:
+	static void takeApple(Apple& a);
+};
+
+
+class Apple
+{
+	
+	int weight;
+	std::string color;
+	static friend void human::takeApple(Apple& a);
+
+public:
+	Apple() : weight(12), color("red")
+	{
+	}
+
+};
+
+
+void human::takeApple(Apple& a)
+{
+	a.color = "white";
+	a.weight /= 2;
+
+}
 
 int main()
 {
 	setlocale(LC_ALL, "ru");
-	//myClass a(5);
-	//myClass b(6);
-	//a = b;
+	/*myClass a(5);
+	myClass b(6);
+	a = b;*/
 
 
-	//int ball_x = 3, ball_y = 9;
-	////int goal_x = 3, goal_y = 9;
-	////int f_x = 5, f_y = 6;
-	//Point ball(ball_x, ball_y);
-	////Point goal(goal_x, goal_y);
-	////Point f(f_x, f_y);
-	////bool result = ball == goal;
-	////bool result2 = ball != goal;
-	////std::cout << result << '\n';
-	////std::cout << result2 << '\n';
+	/*int ball_x = 3, ball_y = 9;
+	int goal_x = 3, goal_y = 9;
+	int f_x = 5, f_y = 6;
+	Point ball(ball_x, ball_y);
+	Point goal(goal_x, goal_y);
+	Point f(f_x, f_y);
+	bool result = ball == goal;
+	bool result2 = ball != goal;
+	std::cout << result << '\n';
+	std::cout << result2 << '\n';
 
-	////Point sum = ball + goal + f;
-	////std::cout << sum.GetX() << " " << sum.GetY() << '\n';
-	// ball++;
-	// ++ball;
-	 return 0;
+	Point sum = ball + goal + f;
+	std::cout << sum.GetX() << " " << sum.GetY() << '\n';
+	ball++;
+	++ball;*/
+
+	//Point a(2,3);
+	//changeX(a);
+	//a.Print();
+
+	/*my_class obj;
+	obj.print_msg();*/
+	apple apl1;
+
+	return 0;
+
 }
