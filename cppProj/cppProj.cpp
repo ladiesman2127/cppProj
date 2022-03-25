@@ -3,7 +3,7 @@
 #include <functional>
 #include <vector>
 
-
+#pragma region classes
 class Apple;
 
 class point
@@ -197,11 +197,15 @@ public:
 
 class Apple
 {
+
 	int weight;
 	std::string color;
 	friend human;
 public:
-	Apple(const int& weight, std::string color) : weight(weight), color(std::move(color)){}
+	static unsigned int count;
+	Apple(const int& weight, std::string color) : weight(weight), color(std::move(color))
+	{
+	}
 	int GetWeight()
 	{
 		return weight;
@@ -211,6 +215,7 @@ public:
 		return  color;
 	}
 };
+unsigned int Apple::count = 2;
 
 
 void human::takeApple(Apple & a)
@@ -220,9 +225,30 @@ void human::takeApple(Apple & a)
 
 }
 
+#pragma endregion classes
+
+class Person
+{
+	unsigned int PersonID;
+	static unsigned int ID;
+public:
+	Person()
+	{
+		PersonID = ID;
+		ID++;
+	}
+	unsigned int GetID()
+	{
+		return PersonID;
+	}
+};
+unsigned int Person::ID = 0;
+
 int main()
 {
 	setlocale(LC_ALL, "ru");
+
+#pragma region Other
 	/*myClass a(5);
 	myClass b(6);
 	a = b;*/
@@ -249,11 +275,20 @@ int main()
 	//a.Print();
 
 	/*my_class obj;
-	obj.print_msg();*/
+	obj.print_msg();
+
 	Apple apl1(120,"red");
 	human human;
 	human.takeApple(apl1);
-	std::cout << apl1.GetWeight() << " " << apl1.get_color() << '\n';
-	return 0;
+	std::cout << apl1.GetWeight() << " " << apl1.get_color() << '\n';*/
+#pragma endregion Other
+
+	Person p1;
+	Person p2;
+	Person p3;
+	std::cout   << p1.GetID() << '\n'
+				<< p2.GetID() << '\n'
+				<< p3.GetID();
+		return 0;
 
 }
