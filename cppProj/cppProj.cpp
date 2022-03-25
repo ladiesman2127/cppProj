@@ -3,7 +3,8 @@
 #include <functional>
 #include <vector>
 
-class apple;
+
+class Apple;
 
 class point
 {
@@ -95,7 +96,7 @@ public:
 		//Methods
 	void Print()
 	{
-		std::cout << "Print()\n" << this->x <<this->y;
+		std::cout << "Print()\n" << this->x << this->y;
 	}
 
 	friend void change_x(point& val);
@@ -180,14 +181,12 @@ void my_class::print_msg()
 	std::cout << "GG\n";
 }
 
-void change_x(point& val)
+void change_x(point & val)
 {
 	val.x = -1;
 	val.y = -1;
 }
 
-
-class Apple;
 
 class human
 {
@@ -198,20 +197,23 @@ public:
 
 class Apple
 {
-	
 	int weight;
 	std::string color;
-	static friend void human::takeApple(Apple& a);
-
+	friend human;
 public:
-	Apple() : weight(12), color("red")
+	Apple(const int& weight, std::string color) : weight(weight), color(std::move(color)){}
+	int GetWeight()
 	{
+		return weight;
 	}
-
+	std::string get_color()
+	{
+		return  color;
+	}
 };
 
 
-void human::takeApple(Apple& a)
+void human::takeApple(Apple & a)
 {
 	a.color = "white";
 	a.weight /= 2;
@@ -248,8 +250,10 @@ int main()
 
 	/*my_class obj;
 	obj.print_msg();*/
-	apple apl1;
-
+	Apple apl1(120,"red");
+	human human;
+	human.takeApple(apl1);
+	std::cout << apl1.GetWeight() << " " << apl1.get_color() << '\n';
 	return 0;
 
 }
