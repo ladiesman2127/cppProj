@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <cmath>
+#include <string>
 #include <functional>
 #include <vector>
 
@@ -214,6 +215,10 @@ public:
 	{
 		return  color;
 	}
+	static void ChangeColor(Apple& apl, std::string color)
+	{
+		apl.color = color;
+	}
 };
 unsigned int Apple::count = 2;
 
@@ -225,10 +230,9 @@ void human::takeApple(Apple & a)
 
 }
 
-#pragma endregion classes
-
 class Person
 {
+private:
 	unsigned int PersonID;
 	static unsigned int ID;
 public:
@@ -241,54 +245,133 @@ public:
 	{
 		return PersonID;
 	}
+	static unsigned int GetCount()
+	{
+		return ID;
+	}
+
 };
 unsigned int Person::ID = 0;
+
+class Pixel
+{
+private:
+	int r_, g_, b_;
+public:
+	Pixel()
+	{
+		r_ = b_ = g_ = 0;
+	}
+	Pixel(const int r, const int g, const int b) : r_(r), g_(g), b_(b) {}
+	std::string info()
+	{
+		return "Pixel: r = " + std::to_string(r_) + " " + "Pixel: g = " + std::to_string(g_) + " " + "Pixel: b = " + std::to_string(b_);
+	}
+};
+class Image
+{
+private:
+	static constexpr unsigned int length = 5;
+	Pixel arr_[length]{};
+public:
+	void get_pixel_info()
+	{
+		for (auto& i : arr_)
+		{
+			std::cout << i.info();
+			std::cout << '\n';
+		}
+	}
+};
+
+#pragma endregionпше
+class human1
+{
+public:
+	void think()
+	{
+		brain.think();
+	}
+private:
+	class brain
+	{
+	public:
+		void think()
+		{
+			std::cout << "Thinking\n";
+		}
+	};
+	brain brain;
+};
 
 int main()
 {
 	setlocale(LC_ALL, "ru");
+	#pragma region Other
+/*myClass a(5);
+myClass b(6);
+a = b;*/
 
-#pragma region Other
-	/*myClass a(5);
-	myClass b(6);
-	a = b;*/
+
+/*int ball_x = 3, ball_y = 9;
+int goal_x = 3, goal_y = 9;
+int f_x = 5, f_y = 6;
+Point ball(ball_x, ball_y);
+Point goal(goal_x, goal_y);
+Point f(f_x, f_y);
+bool result = ball == goal;
+bool result2 = ball != goal;
+std::cout << result << '\n';
+std::cout << result2 << '\n';
+
+Point sum = ball + goal + f;
+std::cout << sum.GetX() << " " << sum.GetY() << '\n';
+ball++;
+++ball;*/
+
+//Point a(2,3);
+//changeX(a);
+//a.Print();
+
+/*my_class obj;
+obj.print_msg();
+
+Apple apl1(120,"red");
+human human;
+human.takeApple(apl1);
+std::cout << apl1.GetWeight() << " " << apl1.get_color() << '\n';*/
 
 
-	/*int ball_x = 3, ball_y = 9;
-	int goal_x = 3, goal_y = 9;
-	int f_x = 5, f_y = 6;
-	Point ball(ball_x, ball_y);
-	Point goal(goal_x, goal_y);
-	Point f(f_x, f_y);
-	bool result = ball == goal;
-	bool result2 = ball != goal;
-	std::cout << result << '\n';
-	std::cout << result2 << '\n';
+//Person p1;
+//Person p2;
+//Person p3;
+//std::cout << p1.GetID() << '\n'
+//			<< p2.GetID() << '\n'
+//			<< p3.GetID();
+//std::cout << '\n' << Person::GetCount();
+//int ap1_w = 12;
+//std::string apl1_c = "red";
+//Apple ap1(ap1_w,apl1_c);
+//Apple ap2(ap1_w, apl1_c);
+//ap1.ChangeColor(ap1, "white");
+//std::cout << ap1.get_color() << " " << ap2.get_color();
 
-	Point sum = ball + goal + f;
-	std::cout << sum.GetX() << " " << sum.GetY() << '\n';
-	ball++;
-	++ball;*/
 
-	//Point a(2,3);
-	//changeX(a);
-	//a.Print();
+	//Image img;
+	//img.GetPixelInfo();
 
-	/*my_class obj;
-	obj.print_msg();
 
-	Apple apl1(120,"red");
-	human human;
-	human.takeApple(apl1);
-	std::cout << apl1.GetWeight() << " " << apl1.get_color() << '\n';*/
-#pragma endregion Other
+	//unsigned int length;
+	//std::cin >> length;
+	//Pixel* arr = new Pixel[length];
+	//for (int i = 0; i < length; i++)
+	//{
+	//	std::cout << arr[i].info() << '\n';
+	//}
 
-	Person p1;
-	Person p2;
-	Person p3;
-	std::cout   << p1.GetID() << '\n'
-				<< p2.GetID() << '\n'
-				<< p3.GetID();
-		return 0;
+#pragma endregion
+	human1 human;
+	human.think();
+	return 0;
 
 }
