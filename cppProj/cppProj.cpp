@@ -13,7 +13,6 @@ class point
 	int x = 0;
 	int y = 0;
 public:
-
 	//Constructor
 	point(int x, int y)
 	{
@@ -95,9 +94,9 @@ public:
 		this->y = y;
 	}
 		//Methods
-	void Print()
+	void print()
 	{
-		std::cout << "Print()\n" << this->x << this->y;
+		std::cout << "Print()\n" << this->x << this->y << '\n';
 	}
 
 	friend void change_x(point& val);
@@ -284,7 +283,7 @@ public:
 	}
 };
 
-#pragma endregionпше
+#pragma endregion
 class human1
 {
 public:
@@ -308,70 +307,70 @@ int main()
 {
 	setlocale(LC_ALL, "ru");
 	#pragma region Other
-/*myClass a(5);
+myClass a(5);
 myClass b(6);
-a = b;*/
+a = b;
 
 
-/*int ball_x = 3, ball_y = 9;
+int ball_x = 3, ball_y = 9;
 int goal_x = 3, goal_y = 9;
 int f_x = 5, f_y = 6;
-Point ball(ball_x, ball_y);
-Point goal(goal_x, goal_y);
-Point f(f_x, f_y);
+point ball(ball_x, ball_y);
+point goal(goal_x, goal_y);
+point f(f_x, f_y);
 bool result = ball == goal;
 bool result2 = ball != goal;
 std::cout << result << '\n';
 std::cout << result2 << '\n';
 
-Point sum = ball + goal + f;
+point sum = ball + goal + f;
 std::cout << sum.GetX() << " " << sum.GetY() << '\n';
 ball++;
-++ball;*/
+++ball;
 
-//Point a(2,3);
-//changeX(a);
-//a.Print();
+	point c(2,3);
+	c.print();
 
-/*my_class obj;
+
+my_class obj;
 obj.print_msg();
 
 Apple apl1(120,"red");
 human human;
 human.takeApple(apl1);
-std::cout << apl1.GetWeight() << " " << apl1.get_color() << '\n';*/
+std::cout << apl1.GetWeight() << " " << apl1.get_color() << '\n';
 
 
-//Person p1;
-//Person p2;
-//Person p3;
-//std::cout << p1.GetID() << '\n'
-//			<< p2.GetID() << '\n'
-//			<< p3.GetID();
-//std::cout << '\n' << Person::GetCount();
-//int ap1_w = 12;
-//std::string apl1_c = "red";
-//Apple ap1(ap1_w,apl1_c);
-//Apple ap2(ap1_w, apl1_c);
-//ap1.ChangeColor(ap1, "white");
-//std::cout << ap1.get_color() << " " << ap2.get_color();
+Person p1;
+Person p2;
+Person p3;
+std::cout << p1.GetID() << '\n'
+			<< p2.GetID() << '\n'
+			<< p3.GetID();
+std::cout << '\n' << Person::GetCount() << '\n';
+int ap1_w = 12;
+std::string apl1_c = "red";
+Apple ap1(ap1_w,apl1_c);
+Apple ap2(ap1_w, apl1_c);
+ap1.ChangeColor(ap1, "white");
+std::cout << ap1.get_color() << " " << ap2.get_color() << '\n';
 
 
-	//Image img;
-	//img.GetPixelInfo();
+	Image img;
+	img.get_pixel_info();
 
 
-	//unsigned int length;
-	//std::cin >> length;
-	//Pixel* arr = new Pixel[length];
-	//for (int i = 0; i < length; i++)
-	//{
-	//	std::cout << arr[i].info() << '\n';
-	//}
+	unsigned int length;
+	std::cin >> length;
+	Pixel* arr = new Pixel[length];
+	for (int i = 0; i < length; i++)
+	{
+		std::cout << arr[i].info() << '\n';
+	}
 
 #pragma endregion
-	human1 human;
-	human.think();
+	human1 hu;
+	hu.think();
 	return 0;
 
 }
