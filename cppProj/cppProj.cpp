@@ -363,7 +363,7 @@ std::cout << ap1.get_color() << " " << ap2.get_color() << '\n';
 	unsigned int length;
 	std::cin >> length;
 	Pixel* arr = new Pixel[length];
-	for (int i = 0; i < length; i++)
+	for (unsigned int i = 0; i < length; i++)
 	{
 		std::cout << arr[i].info() << '\n';
 	}

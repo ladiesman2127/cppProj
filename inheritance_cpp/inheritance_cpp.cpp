@@ -4,17 +4,25 @@
 
 class human
 {
-private:
-	std::string name;
 public:
-	std::string get_name()
+	human(std::string name)
 	{
-		return name;
+		this->name_ = name;
+		this->age_ = 0;
+		this->weight_ = 0;
 	}
-	void set_name(std::string name)
+	human(std::string name, unsigned int age) :human(name)
 	{
-		this->name = name;
+		this->age_ = age;
 	}
+	human(std::string name, unsigned int age, unsigned int weight) :human(name, age)
+	{
+		this->weight_ = weight;
+	}
+private:
+	std::string name_;
+	unsigned int age_;
+	unsigned int weight_;
 };
 class student : public human
 {
@@ -77,6 +85,8 @@ public:
 	}
 };
 
+
+
 class player
 {
 public:
@@ -111,8 +121,8 @@ public:
 };
 int main()
 {
-	b b;
 
+	human h("Дезмонд", 27, 60);
 
 }
 

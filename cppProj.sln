@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cppProj", "cppProj\cppProj.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "inheritance_cpp", "inheritance_cpp\inheritance_cpp.vcxproj", "{4015BA48-2B4E-45E5-A94E-A5E68C009E13}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "codewars", "codewars\codewars.vcxproj", "{9D830B8C-C312-4A94-A181-3059B681507E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{4015BA48-2B4E-45E5-A94E-A5E68C009E13}.Release|x64.Build.0 = Release|x64
 		{4015BA48-2B4E-45E5-A94E-A5E68C009E13}.Release|x86.ActiveCfg = Release|Win32
 		{4015BA48-2B4E-45E5-A94E-A5E68C009E13}.Release|x86.Build.0 = Release|Win32
+		{9D830B8C-C312-4A94-A181-3059B681507E}.Debug|x64.ActiveCfg = Debug|x64
+		{9D830B8C-C312-4A94-A181-3059B681507E}.Debug|x64.Build.0 = Debug|x64
+		{9D830B8C-C312-4A94-A181-3059B681507E}.Debug|x86.ActiveCfg = Debug|Win32
+		{9D830B8C-C312-4A94-A181-3059B681507E}.Debug|x86.Build.0 = Debug|Win32
+		{9D830B8C-C312-4A94-A181-3059B681507E}.Release|x64.ActiveCfg = Release|x64
+		{9D830B8C-C312-4A94-A181-3059B681507E}.Release|x64.Build.0 = Release|x64
+		{9D830B8C-C312-4A94-A181-3059B681507E}.Release|x86.ActiveCfg = Release|Win32
+		{9D830B8C-C312-4A94-A181-3059B681507E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
