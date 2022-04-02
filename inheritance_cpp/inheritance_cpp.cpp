@@ -39,14 +39,80 @@ public:
 
 	std::string subject;
 };
+class weapon
+{
+public:
+	virtual void use() = 0;
+};
+class gun : public weapon
+{
+public:
+	void use() override
+	{
+		std::cout << "Bang!\n";
+	}
+};
+class sub_machine_gun : public gun
+{
+public:
+	void use() override
+	{
+		std::cout << "Bang! Bang! Bang!\n";
+	}
+};
+class bazzoka : public weapon
+{
+public:
+	void use() override
+	{
+		std::cout << "BadaBum!\n";
+	}
+};
+class knife : public weapon
+{
+public:
+	void use() override
+	{
+		std::cout << "Pshick!\n";
+	}
+};
+
+class player
+{
+public:
+	void use(weapon* weapon)
+	{
+		weapon->use();
+	}
+};
+
+class a
+{
+public:
+	a()
+	{
+		
+	}
+	virtual ~a() = 0;
+};
+
+a::~a() {};
+class b : public a
+{
+public:
+	b()
+	{
+		
+	}
+	~b() override
+	{
+		
+	}
+};
 int main()
 {
-	setlocale(LC_ALL, "ru");
-	student st;
-	
-	st.learn();
-	extramural_student ex_st;
-	ex_st.learn();
+	b b;
+
 
 }
 
