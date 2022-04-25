@@ -42,10 +42,33 @@ public:
 };
 
 
+
+class pc
+{
+public:
+	enum pc_state
+	{
+		ON,
+		OFF,
+		SLEEP
+	};
+	pc_state get_state() const
+	{
+		return state_;
+	}
+	void set_state(const pc_state state)
+	{
+		this->state_ = state;
+	}
+private:
+	pc_state state_;
+};
 int main()
 {
+	pc pc1;
+	pc1.set_state(pc::ON);
+	std::cout << pc1.get_state();
 
-	graph_card("Nvidia", "Samsung");
-	return 0;
+		return 0;
 }
 

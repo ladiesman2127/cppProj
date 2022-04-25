@@ -1,5 +1,4 @@
 ﻿#include <iostream>
-#include <cmath>
 #include <string>
 #include <functional>
 #include <vector>
@@ -77,19 +76,19 @@ public:
 		return temp;
 	}
 	//Getters and Setters
-	int GetX()
+	int get_x()
 	{
 		return x;
 	}
-	void SetX(int x)
+	void set_x(int x)
 	{
 		this->x = x;
 	}
-	int GetY()
+	int get_y()
 	{
 		return y;
 	}
-	void SetY(int y)
+	void set_y(int y)
 	{
 		this->y = y;
 	}
@@ -324,7 +323,7 @@ std::cout << result << '\n';
 std::cout << result2 << '\n';
 
 point sum = ball + goal + f;
-std::cout << sum.GetX() << " " << sum.GetY() << '\n';
+std::cout << sum.get_x() << " " << sum.get_y() << '\n';
 ball++;
 ++ball;
 

@@ -1,42 +1,34 @@
 ﻿#include <string>
-#include <vector>
+#include <unordered_map>
+#include <algorithm>
+
+#include <cctype>
 #include <iostream>
 
-//std::string reverse_words(std::string str)
-//{
-//	std::string ans = "";
-//	int cnt_of_intends = 0;
-//	int prev_index;
-//	for (int i = 0; i < str.size(); i++)
-//	{
-//		if (str[i] = ' ')
-//		{
-//			cnt_of_intends++;
-//			for (int j = i;j > 0;j--)
-//			{
-//				ans = ans + std::string() + str[j];
-//			}
-//		}
-//	}
-//	return ans;
-//}
+std::size_t duplicateCount(const char* in)
+{
+	std::unordered_map<char, unsigned> counts;
+	for(const char* c = in; *c != '\0'; ++c)
+	{
+		++counts[tolower(*c)];
+	}
+	return std::count_if(cbegin(counts), cend(counts), [](const auto& count)
+						 {
+							 return count.second > 1;
+						 });
+}
+
+
 
 int main()
 {
-	std::string ans;
-	std::string str = "The quick brown fox jumps over the lazy dog.";
-	int previous_index = 0;
-	for (int i = 0; i < str.size(); i++)
+	std::string inp;
+	std::cin >> inp;
+	char* str = new char[std::size(inp)];
+	for(size_t i = 0; i < std::size(inp); i++)
 	{
-		if (str[i] == ' ' || i == str.size() - 1)
-		{
-			for (int j = i; j >= previous_index; j--)
-			{
-				ans += str[j];
-			}
-			previous_index = i;
-		}
+		*(str + i) = inp[i];
 	}
-	std::cout << ans;
+	std::cout << duplicateCount(str);
 	return 0;
 }
