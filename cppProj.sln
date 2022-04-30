@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "search", "search\search.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "data_structs", "data_structs\data_structs.vcxproj", "{6389E5D9-7A31-4342-A4DF-7906765E2BCC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "interview", "interview\interview.vcxproj", "{69FB7B8B-55CD-4D1A-AAAB-1D96C7089361}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +103,14 @@ Global
 		{6389E5D9-7A31-4342-A4DF-7906765E2BCC}.Release|x64.Build.0 = Release|x64
 		{6389E5D9-7A31-4342-A4DF-7906765E2BCC}.Release|x86.ActiveCfg = Release|Win32
 		{6389E5D9-7A31-4342-A4DF-7906765E2BCC}.Release|x86.Build.0 = Release|Win32
+		{69FB7B8B-55CD-4D1A-AAAB-1D96C7089361}.Debug|x64.ActiveCfg = Debug|x64
+		{69FB7B8B-55CD-4D1A-AAAB-1D96C7089361}.Debug|x64.Build.0 = Debug|x64
+		{69FB7B8B-55CD-4D1A-AAAB-1D96C7089361}.Debug|x86.ActiveCfg = Debug|Win32
+		{69FB7B8B-55CD-4D1A-AAAB-1D96C7089361}.Debug|x86.Build.0 = Debug|Win32
+		{69FB7B8B-55CD-4D1A-AAAB-1D96C7089361}.Release|x64.ActiveCfg = Release|x64
+		{69FB7B8B-55CD-4D1A-AAAB-1D96C7089361}.Release|x64.Build.0 = Release|x64
+		{69FB7B8B-55CD-4D1A-AAAB-1D96C7089361}.Release|x86.ActiveCfg = Release|Win32
+		{69FB7B8B-55CD-4D1A-AAAB-1D96C7089361}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
