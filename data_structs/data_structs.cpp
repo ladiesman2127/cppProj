@@ -1,8 +1,9 @@
 ﻿#include <iostream>
 #include <string>
 
+#pragma once region single_linked_list
 template <class T>
-class my_list
+class single_linked_list
 {
 private:
 	class node
@@ -15,13 +16,12 @@ private:
 			this->data = data;
 			this->ptr_next = ptr_next;
 		}
-
 	};
 	node* head; // head(main) node
 	int size;
 public:
-	my_list();
-	~my_list();
+	single_linked_list();
+	~single_linked_list();
 	void push_back(T data);
 	void push_front(T data);
 	void pop_back(T data);
@@ -35,20 +35,20 @@ public:
 };
 
 template <class T>
-my_list<T>::my_list()
+single_linked_list<T>::single_linked_list()
 {
 	size = 0;
 	head = nullptr;
 }
 
 template <class T>
-my_list<T>::~my_list()
+single_linked_list<T>::~single_linked_list()
 {
 	clear();
 }
 
 template <class T>
-void my_list<T>::push_back(T data)
+void single_linked_list<T>::push_back(T data)
 {
 
 	//Сначала проверяем есть ли хоть какой-то элеменет в листе
@@ -74,14 +74,14 @@ void my_list<T>::push_back(T data)
 }
 
 template <class T>
-void my_list<T>::push_front(T data)
+void single_linked_list<T>::push_front(T data)
 {
 	head = new node(data, head);
 	size++;
 }
 
 template <class T>
-void my_list<T>::pop_back(T data)
+void single_linked_list<T>::pop_back(T data)
 {
 	node* cur_node = this->head;
 
@@ -94,7 +94,7 @@ void my_list<T>::pop_back(T data)
 }
 
 template <class T>
-void my_list<T>::insert(T data, int index)
+void single_linked_list<T>::insert(T data, int index)
 {
 	if(index == 0)
 	{
@@ -116,7 +116,7 @@ void my_list<T>::insert(T data, int index)
 
 
 template <class T>
-void my_list<T>::pop_front()
+void single_linked_list<T>::pop_front()
 {
 	//Запоминаем адресс головы
 	node* temp = head;
@@ -128,7 +128,7 @@ void my_list<T>::pop_front()
 }
 
 template <class T>
-void my_list<T>::remove_at(int index)
+void single_linked_list<T>::remove_at(int index)
 {
 	if(index == 0)
 	{
@@ -141,7 +141,7 @@ void my_list<T>::remove_at(int index)
 	else
 	{
 		node* cur_node = this->head;
-		for(int i = 0;i < index - 1;i++)
+		for(int i = 0; i < index - 1; i++)
 		{
 			cur_node = cur_node->ptr_next;
 		}
@@ -153,7 +153,7 @@ void my_list<T>::remove_at(int index)
 }
 
 template <class T>
-void my_list<T>::clear()
+void single_linked_list<T>::clear()
 {
 	while(size)
 	{
@@ -162,7 +162,7 @@ void my_list<T>::clear()
 }
 
 template <class T>
-T& my_list<T>::operator[](const int index)
+T& single_linked_list<T>::operator[](const int index)
 {
 	int cur_index = 0;
 	node* cur_node = this->head;
@@ -175,9 +175,115 @@ T& my_list<T>::operator[](const int index)
 	}
 }
 
+#pragma endregion
+
+#pragma region double_linked_list
+
+template <class T>
+class double_linked_list
+{
+private:
+	class node
+	{
+	public:
+		node(T data, node* ptr_next = nullptr, node* ptr_prev = nullptr)
+		{
+			this->data = data;
+			this->ptr_next = ptr_next;
+			this->ptr_prev = ptr_prev;
+		}
+		node* ptr_next;
+		node* ptr_prev;
+		T data;
+	};
+	node* head_;
+	node* tail_;
+	int size;
+public:
+	double_linked_list();
+	~double_linked_list();
+	int get_size();
+	void push_back(T data);
+	void push_front(T data);
+	void pop_back();
+	void pop_front();
+	void insert(int index,T data);
+	void remove_at(int index);
+	void clear();
+};
+
+template <class T>
+double_linked_list<T>::double_linked_list()
+{
+	size = 0;
+	head_ = nullptr;
+	tail_ = nullptr;
+}
+
+template <class T>
+double_linked_list<T>::~double_linked_list()
+{ }
+
+template <class T>
+int double_linked_list<T>::get_size()
+{
+	return size;
+}
+
+template <class T>
+void double_linked_list<T>::push_back(T data)
+{
+	if(head_->ptr_next == nullptr)
+	{
+		head_->ptr_next = new node(data);
+		tail_->ptr_prev = head_->ptr_next;
+	}
+	else
+	{
+		node* cur_node = head_->ptr_next;
+		while(cur_node->ptr_next != nullptr)
+		{
+			cur_node = cur_node->ptr_next;
+		}
+		cur_node->ptr_next = new node(data);
+	}
+	size++;
+}
+
+template <class T>
+void double_linked_list<T>::push_front(T data)
+{
+}
+
+template <class T>
+void double_linked_list<T>::pop_back()
+{
+}
+
+template <class T>
+void double_linked_list<T>::pop_front()
+{
+}
+
+template <class T>
+void double_linked_list<T>::insert(int index,T data)
+{
+}
+
+template <class T>
+void double_linked_list<T>::remove_at(int index)
+{
+}
+
+template <class T>
+void double_linked_list<T>::clear()
+{
+}
+
+#pragma endregion
 int main()
 {
-	my_list<int> lst;
+	/*single_linked_list<int> lst;
 	lst.push_back(1);
 	lst.push_back(11);
 	lst.push_back(72);
@@ -185,6 +291,6 @@ int main()
 	for(int i = 0; i < lst.get_size(); i++)
 	{
 		std::cout << lst[i] << " ";
-	}
+	}*/
 	return 0;
 }

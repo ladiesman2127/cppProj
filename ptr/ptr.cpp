@@ -1,4 +1,4 @@
-﻿
+﻿                   
 #include <memory>
 #include <iostream>
 
@@ -8,7 +8,7 @@
 //public:
 //	point()
 //	{
-//		x = y = z = 0;
+//\		x = y = z = 0;
 //	}
 //	point(int x, int y, int z)
 //	{
@@ -114,13 +114,13 @@ int main()
 
 	// reset: deleted all values and ptrs = 0
 	// release: all data is not deleted ptrs = 0
-	srand(time(nullptr));
+	srand(time(nullptr));  // NOLINT(cert-msc51-cpp, clang-diagnostic-shorten-64-to-32)
 	int size;
 	std::cin >> size;
-	std::shared_ptr<int[]> arr(new int[size]);
+	const std::shared_ptr<int[]> arr(new int[size]);
 	for(int i = 0; i < size; i++)
 	{
-		arr[i] = rand() % 10;
+		arr[i] = rand() % 10;  // NOLINT(concurrency-mt-unsafe)
 	}
 	for(int i = 0; i < size; i++)
 	{

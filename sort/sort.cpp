@@ -175,6 +175,31 @@ int* counting_sort(int* arr, const int SIZE)
 	return arr;
 }
 
+//SHAKING SORT
+void shaker_sort(int* arr,const int SIZE)
+{
+	int left  = 0;
+	int right = SIZE - 1;
+	while(left <= right)
+	{
+		for(int i = left;i < right;i++)
+		{
+			if(arr[i] > arr[i+1])
+			{
+				std::swap(arr[i], arr[i + 1]);
+			}
+		}
+		right--;
+		for(int j = right;j > left;j--)
+		{
+			if(arr[j] < arr[j-1])
+			{
+				std::swap(arr[j], arr[j - 1]);
+			}
+		}
+		left++;
+	}
+}
 int main()
 {
 	const unsigned int start_time = clock();
@@ -185,7 +210,7 @@ int main()
 		std::cin >> i;
 	}
 
-	bubble_sort(arr, N);
+	shaker_sort(arr, N);
 
 	for(int i = 0; i < N; i++)
 	{
