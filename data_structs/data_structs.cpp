@@ -186,7 +186,7 @@ private:
 	class node
 	{
 	public:
-		node(T data, node* ptr_next = nullptr, node* ptr_prev = nullptr)
+		node(T data = T(), node* ptr_next = nullptr, node* ptr_prev = nullptr)
 		{
 			this->data = data;
 			this->ptr_next = ptr_next;
@@ -246,6 +246,8 @@ void double_linked_list<T>::push_back(T data)
 			cur_node = cur_node->ptr_next;
 		}
 		cur_node->ptr_next = new node(data);
+		cur_node->ptr_next->ptr_prev = cur_node;
+		tail_ = cur_node->ptr_next;
 	}
 	size++;
 }
@@ -253,6 +255,17 @@ void double_linked_list<T>::push_back(T data)
 template <class T>
 void double_linked_list<T>::push_front(T data)
 {
+	if(head_->ptr_next == nullptr)
+	{
+		head_->ptr_next = new node(data);
+		tail_->ptr_prev = head_->ptr_next;
+	}
+	else
+	{
+		node temp = new node(data,head_);
+		head_ = temp;
+	}
+	size++;
 }
 
 template <class T>
