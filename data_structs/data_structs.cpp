@@ -210,6 +210,7 @@ public:
 	void insert(int index,T data);
 	void remove_at(int index);
 	void clear();
+	T& operator[](int index);
 };
 
 template <class T>
@@ -222,7 +223,9 @@ double_linked_list<T>::double_linked_list()
 
 template <class T>
 double_linked_list<T>::~double_linked_list()
-{ }
+{
+	clear();
+}
 
 template <class T>
 int double_linked_list<T>::get_size()
@@ -271,26 +274,65 @@ void double_linked_list<T>::push_front(T data)
 template <class T>
 void double_linked_list<T>::pop_back()
 {
+	node* temp = tail_;
+	tail_ = tail_->ptr_prev;
+	delete temp;
+	tail_->ptr_next = nullptr;
+	size--;
 }
 
 template <class T>
 void double_linked_list<T>::pop_front()
 {
+	node* temp = head_;
+	head_ = head_->ptr_next;
+	delete temp;
+	head_->ptr_prev = nullptr;
+	size--;
 }
 
 template <class T>
 void double_linked_list<T>::insert(int index,T data)
 {
+
 }
 
 template <class T>
 void double_linked_list<T>::remove_at(int index)
 {
+
 }
 
 template <class T>
 void double_linked_list<T>::clear()
 {
+	while(size != 0)
+		pop_front();
+}
+
+template <class T>
+T& double_linked_list<T>::operator[](int index)
+{
+	node* cur_node;
+	int cur_index = 0;
+	if(index > size/2)
+	{
+		cur_node = tail_;
+		while(cur_index != size - index)			///////////////////??????????????????/////////////////////
+		{
+			cur_node = cur_node->ptr_prev;
+		}
+	}
+	else
+	{
+		cur_node = head_;
+		while(cur_index != index)
+		{
+			cur_node = cur_node->ptr_next;
+			cur_index++;
+		}
+		return cur_node->data;
+	}
 }
 
 #pragma endregion
