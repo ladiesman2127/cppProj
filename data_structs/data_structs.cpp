@@ -311,28 +311,31 @@ void double_linked_list<T>::clear()
 }
 
 template <class T>
-T& double_linked_list<T>::operator[](int index)
+T& double_linked_list<T>::operator[](const int index)
 {
 	node* cur_node;
-	int cur_index = 0;
+	int cur_index;
 	if(index > size/2)
 	{
 		cur_node = tail_;
-		while(cur_index != size - index)			///////////////////??????????????????/////////////////////
+		cur_index = size - 1;
+		while(cur_index != index)			
 		{
 			cur_node = cur_node->ptr_prev;
+			cur_index--;
 		}
 	}
 	else
 	{
 		cur_node = head_;
+		cur_index = 0;
 		while(cur_index != index)
 		{
 			cur_node = cur_node->ptr_next;
 			cur_index++;
 		}
-		return cur_node->data;
 	}
+	return cur_node->data;
 }
 
 #pragma endregion
