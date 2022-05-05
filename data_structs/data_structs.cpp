@@ -100,6 +100,10 @@ void single_linked_list<T>::insert(T data, int index)
 	{
 		push_front(data);
 	}
+	else if(index == size - 1)
+	{
+		push_back(data);
+	}
 	else
 	{
 		node* previous = this->head;
@@ -179,7 +183,7 @@ T& single_linked_list<T>::operator[](const int index)
 
 #pragma region double_linked_list
 
-template <class T>
+template <class T> // done!
 class double_linked_list
 {
 private:
@@ -207,13 +211,13 @@ public:
 	void push_front(T data);
 	void pop_back();
 	void pop_front();
-	void insert(int index,T data);
+	void insert(int index, T data);
 	void remove_at(int index);
 	void clear();
 	T& operator[](int index);
 };
 
-template <class T>
+template <class T> //done
 double_linked_list<T>::double_linked_list()
 {
 	size = 0;
@@ -221,105 +225,188 @@ double_linked_list<T>::double_linked_list()
 	tail_ = nullptr;
 }
 
-template <class T>
+template <class T> //done
 double_linked_list<T>::~double_linked_list()
 {
 	clear();
 }
 
-template <class T>
+template <class T> //done
 int double_linked_list<T>::get_size()
 {
 	return size;
 }
 
-template <class T>
+template <class T> //done
 void double_linked_list<T>::push_back(T data)
 {
-	if(head_->ptr_next == nullptr)
+	if(head_ == nullptr)
 	{
-		head_->ptr_next = new node(data);
-		tail_->ptr_prev = head_->ptr_next;
+		head_ = new node(data);
+		tail_ = head_;
 	}
 	else
 	{
-		node* cur_node = head_->ptr_next;
+		node* cur_node = head_;
 		while(cur_node->ptr_next != nullptr)
 		{
 			cur_node = cur_node->ptr_next;
 		}
 		cur_node->ptr_next = new node(data);
-		cur_node->ptr_next->ptr_prev = cur_node;
 		tail_ = cur_node->ptr_next;
+		tail_->ptr_prev = cur_node;
 	}
 	size++;
 }
 
-template <class T>
+template <class T> //done
 void double_linked_list<T>::push_front(T data)
 {
-	if(head_->ptr_next == nullptr)
+	if(head_ == nullptr)
 	{
-		head_->ptr_next = new node(data);
-		tail_->ptr_prev = head_->ptr_next;
+		head_ = new node(data);
+		tail_ = head_;
 	}
 	else
 	{
-		node temp = new node(data,head_);
-		head_ = temp;
+		if(size == 1)
+		{
+			tail_ = head_;
+		}
+		head_ = new node(data, head_);
+		head_->ptr_next->ptr_prev = head_;
 	}
 	size++;
 }
 
-template <class T>
+template <class T>	// done
 void double_linked_list<T>::pop_back()
 {
-	node* temp = tail_;
-	tail_ = tail_->ptr_prev;
-	delete temp;
-	tail_->ptr_next = nullptr;
+	if(size == 1)
+	{
+		delete tail_;
+	}
+	else
+	{
+		tail_ = tail_->ptr_prev;
+		delete  tail_->ptr_next;
+	}
 	size--;
 }
 
-template <class T>
+template <class T> //done
 void double_linked_list<T>::pop_front()
 {
-	node* temp = head_;
-	head_ = head_->ptr_next;
-	delete temp;
-	head_->ptr_prev = nullptr;
+	if(size == 1)
+	{
+		delete head_;
+	}
+	else
+	{
+		head_ = head_->ptr_next;
+		delete head_->ptr_prev;
+	}
 	size--;
 }
 
-template <class T>
-void double_linked_list<T>::insert(int index,T data)
+template <class T> //done
+void double_linked_list<T>::insert(int index, T data)
 {
-
+	if(index == 0)
+	{
+		push_front(data);
+	}
+	else
+	{
+		node* prev_node;
+		int cur_index;
+		if(index >= size / 2)
+		{
+			cur_index = size - 1;
+			prev_node = tail_;
+			while(cur_index != index - 1)
+			{
+				prev_node = prev_node->ptr_prev;
+				cur_index--;
+			}
+		}
+		else
+		{
+			cur_index = 0;
+			prev_node = head_;
+			while(cur_index != index - 1)
+			{
+				prev_node = prev_node->ptr_next;
+				cur_index++;
+			}
+		}
+		node* new_node = new node(data, prev_node->ptr_next, prev_node);
+		prev_node->ptr_next = new_node;
+		new_node->ptr_next->ptr_prev = new_node;
+		size++;
+	}
 }
 
-template <class T>
+template <class T> // done
 void double_linked_list<T>::remove_at(int index)
 {
-
+	if(index == 0)
+	{
+		pop_front();
+	}
+	else if(index == size - 1)
+	{
+		pop_back();
+	}
+	else
+	{
+		node* prev_node;
+		int cur_index;
+		if(index >= size / 2)
+		{
+			cur_index = size - 1;
+			prev_node = tail_;
+			while(cur_index != index - 1)
+			{
+				prev_node = prev_node->ptr_prev;
+				cur_index--;
+			}
+		}
+		else
+		{
+			cur_index = 0;
+			prev_node = head_;
+			while(cur_index != index - 1)
+			{
+				prev_node = prev_node->ptr_next;
+				cur_index++;
+			}
+		}
+		node* remove_node = prev_node->ptr_next;
+		prev_node->ptr_next = remove_node->ptr_next;
+		remove_node->ptr_next->ptr_prev = prev_node;
+		delete remove_node;
+		size--;
+	}
 }
 
-template <class T>
+template <class T> //done
 void double_linked_list<T>::clear()
 {
 	while(size != 0)
-		pop_front();
+		pop_back();
 }
 
-template <class T>
+template <class T> //done
 T& double_linked_list<T>::operator[](const int index)
 {
 	node* cur_node;
 	int cur_index;
-	if(index > size/2)
+	if(index >= size / 2)
 	{
 		cur_node = tail_;
 		cur_index = size - 1;
-		while(cur_index != index)			
+		while(cur_index != index)
 		{
 			cur_node = cur_node->ptr_prev;
 			cur_index--;
@@ -339,8 +426,101 @@ T& double_linked_list<T>::operator[](const int index)
 }
 
 #pragma endregion
+
+#pragma once region binary_tree 
+template <class T> //done
+class tree
+{
+private:
+	int size_;
+	class node
+	{
+	public:
+		T data;
+		node* left;
+		node* right;
+		node(T data = T(), node* left = nullptr, node* right = nullptr)
+		{
+			this->data = data;
+			this->left = left;
+			this->right = right;
+		}
+	};
+	node* root_;
+public:
+	tree();
+	~tree();
+	void add(T data);
+	bool is_contain(T check_data);
+};
+
+template <class T> //done
+tree<T>::tree()
+{
+	size_ = 0;
+	root_ = nullptr;
+}
+
+template <class T>
+tree<T>::~tree()
+= default;
+
+template <class T> //done
+void tree<T>::add(T data)
+{
+	if(root_ == nullptr)
+	{
+		root_ = new node(data);
+	}
+	else
+	{
+		node* cur_node = root_;
+		while(cur_node->left != nullptr && data < cur_node->data ||
+			  cur_node->right != nullptr && data > cur_node->data)
+		{
+			if(data < cur_node->data)
+			{
+				cur_node = cur_node->left;
+			}
+			else if(data > cur_node->data)
+			{
+				cur_node = cur_node->right;
+			}
+		}
+		if(data < cur_node->data)
+			cur_node->left = new node(data);
+		else
+			cur_node->right = new node(data);
+	}
+	size_++;
+}
+
+
+template <class T> //done
+bool tree<T>::is_contain(T check_data)
+{
+	node* cur_node = root_;
+	while(cur_node->data != check_data)
+	{
+		if(check_data < cur_node->data && cur_node->left == nullptr ||
+		   check_data > cur_node->data && cur_node->right == nullptr)
+			return false;
+		if(check_data > cur_node->data)
+		{
+			cur_node = cur_node->right;
+		}
+		else
+		{
+			cur_node = cur_node->left;
+		}
+	}
+	return true;
+}
+
+#pragma endregion
 int main()
 {
+#pragma once region ...
 	/*single_linked_list<int> lst;
 	lst.push_back(1);
 	lst.push_back(11);
@@ -350,5 +530,38 @@ int main()
 	{
 		std::cout << lst[i] << " ";
 	}*/
+
+	/*double_linked_list<int> dbl_list;
+	dbl_list.push_front(1);
+	dbl_list.push_front(2);
+	dbl_list.push_front(-9);
+	dbl_list.push_front(44);
+	dbl_list.push_front(24);
+	dbl_list.push_back(4);
+	std::cout << dbl_list.get_size() << '\n';
+	dbl_list.insert(dbl_list.get_size() -1 , 0);
+	dbl_list.remove_at(3);
+	dbl_list.remove_at(0);
+	dbl_list.remove_at(0);
+	dbl_list.remove_at(0);
+	dbl_list.remove_at(0);
+	dbl_list.remove_at(0);
+	dbl_list.remove_at(0);
+	for(auto i = 0; i < dbl_list.get_size(); i++)
+	{
+		std::cout << dbl_list[i] << " ";
+	}*/
+	//std::cout << dbl_list.get_size() << '\n';
+
+	/*tree<int> my_tree;
+	my_tree.add(72);
+	my_tree.add(9);
+	my_tree.add(0);
+	my_tree.add(-1);
+	my_tree.add(122);
+	my_tree.add(143);
+	std::cout << my_tree.is_contain(-2);*/
+#pragma endregion
+
 	return 0;
 }
