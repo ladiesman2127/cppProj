@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 
-#pragma once region single_linked_list
+#pragma once region single_linked_list  // NOLINT(clang-diagnostic-pragma-once-outside-header, clang-diagnostic-extra-tokens)
 template <class T>
 class single_linked_list
 {
@@ -177,6 +177,7 @@ T& single_linked_list<T>::operator[](const int index)
 		cur_index++;
 		cur_node = cur_node->ptr_next;
 	}
+	return {};
 }
 
 #pragma endregion
@@ -206,7 +207,8 @@ private:
 public:
 	double_linked_list();
 	~double_linked_list();
-	int get_size();
+	T& operator[](int index);
+	int get_size() const { return size; }
 	void push_back(T data);
 	void push_front(T data);
 	void pop_back();
@@ -214,7 +216,6 @@ public:
 	void insert(int index, T data);
 	void remove_at(int index);
 	void clear();
-	T& operator[](int index);
 };
 
 template <class T> //done
@@ -229,12 +230,6 @@ template <class T> //done
 double_linked_list<T>::~double_linked_list()
 {
 	clear();
-}
-
-template <class T> //done
-int double_linked_list<T>::get_size()
-{
-	return size;
 }
 
 template <class T> //done
