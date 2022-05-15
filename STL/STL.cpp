@@ -64,17 +64,20 @@ int main()
 	//arr2.fill(72);
 	//const bool res = arr2 == arr;
 	//std::cout << res;
-#pragma endregion
+
 	//const std::deque<int> dq { 1,3,45 };
-	std::set   <int> mySet {};
-	std::vector<int> v { 1,3,5,6 };
-	mySet.insert(2);
-	mySet.insert(-1);
-	mySet.insert(22);
-	mySet.insert(72);
-	mySet.insert(-1);
-	for(auto& item : mySet)
-	{
-		std::cout << item << " ";
-	}
+	//std::set   <int> mySet {};
+	//std::vector<int> v { 1,3,5,6 };
+	//mySet.insert(2);
+	//mySet.insert(-1);
+	//mySet.insert(22);
+	//mySet.insert(72);
+	//mySet.insert(-1);
+	//for(auto& item : mySet)
+	//{
+	//	std::cout << item << " ";
+	//}
+#pragma endregion
+
+
 }
