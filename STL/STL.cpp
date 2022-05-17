@@ -78,6 +78,6 @@ int main()
 	//	std::cout << item << " ";
 	//}
 #pragma endregion
-
-
+	std::pair<int, std::string> p1{ 1,"GG" };
+	std::cout << p1.first << '\n' << p1.second;
 }
