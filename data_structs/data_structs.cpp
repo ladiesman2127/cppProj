@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <string>
+#include <algorithm>
 
 #pragma once region single_linked_list  // NOLINT(clang-diagnostic-pragma-once-outside-header, clang-diagnostic-extra-tokens)
 template <class T>

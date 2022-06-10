@@ -104,6 +104,7 @@ public:
 int main()
 {
 	//int* p = new int(22);
+	std::auto_ptr<int> auto_ptr;
 	//std::shared_ptr<int> s_ptr1(p);
 	//std::shared_ptr<int> u_ptr2(s_ptr1);
 	/*std::unique_ptr<int> u_ptr2 = std::move(u_ptr1);

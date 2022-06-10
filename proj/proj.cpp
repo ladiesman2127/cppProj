@@ -67,6 +67,8 @@ int main()
 {
 	pc pc1;
 	pc1.set_state(pc::ON);
+	pc1.set_state(pc::ON);
+	pc1.set_state(pc::OFF);
 	std::cout << pc1.get_state();
 
 		return 0;
