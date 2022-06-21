@@ -1,7 +1,6 @@
 ﻿#include <string>
 #include <unordered_map>
 #include <algorithm>
-
 #include <cctype>
 #include <iostream>
 
@@ -35,15 +34,15 @@ int last_digit(const std::string& str1, const std::string& str2)
 
 int main()
 {
-	/*std::string inp;
-	std::cin >> inp;
-	char* str = new char[std::size(inp)];
-	for(size_t i = 0; i < std::size(inp); i++)
-	{
-		*(str + i) = inp[i];
-	}
-	std::cout << duplicateCount(str);*/
+	//*std::string inp;
+	//std::cin >> inp;
+	//char* str = new char[std::size(inp)];
+	//for(size_t i = 0; i < std::size(inp); i++)
+	//{
+	//	*(str + i) = inp[i];
+	//}
+	//std::cout << duplicateCount(str);*/
+	//last_digit("3715290469715693021198967285016729344580685479654510946723", "68819615221552997273737174557165657483427362207517952651");
 
-	last_digit("3715290469715693021198967285016729344580685479654510946723", "68819615221552997273737174557165657483427362207517952651");
 	return 0;
 }

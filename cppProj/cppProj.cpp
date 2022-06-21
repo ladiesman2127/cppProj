@@ -92,7 +92,7 @@ public:
 	{
 		this->y = y;
 	}
-		//Methods
+	//Methods
 	void print()
 	{
 		std::cout << "Print()\n" << this->x << this->y << '\n';
@@ -180,7 +180,7 @@ void my_class::print_msg()
 	std::cout << "GG\n";
 }
 
-void change_x(point & val)
+void change_x(point& val)
 {
 	val.x = -1;
 	val.y = -1;
@@ -221,7 +221,7 @@ public:
 unsigned int Apple::count = 2;
 
 
-void human::takeApple(Apple & a)
+void human::takeApple(Apple& a)
 {
 	a.color = "white";
 	a.weight /= 2;
@@ -302,9 +302,24 @@ private:
 	brain brain;
 };
 
+void hanoi(const int n, const int i, int k)
+{
+	if (n == 1)
+	{
+		std::cout << n << " move " << i << " -> " << k << '\n';
+	}
+	else
+	{
+		int tmp = 3 - i - k;
+		hanoi(n - 1, i, tmp);
+		std::cout << n << " move " << i << " -> " << k << '\n';
+		hanoi(n - 1, tmp, k);
+	}
+}
+
 int main()
 {
-	setlocale(LC_ALL, "ru");
+	/*setlocale(LC_ALL, "ru");
 	#pragma region Other
 myClass a(5);
 myClass b(6);
@@ -370,6 +385,7 @@ std::cout << ap1.get_color() << " " << ap2.get_color() << '\n';
 #pragma endregion
 	human1 hu;
 	hu.think();
-	return 0;
+	return 0;*/
+	hanoi(3, 0, 1);
 
 }

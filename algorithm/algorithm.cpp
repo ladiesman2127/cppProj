@@ -79,7 +79,7 @@ int main()
 						*/
 
 	std::vector<int>     v  { 1,2,4,3 };
-	std::vector<int>     v1 { 3,1,4   };
+	//std::vector<int>     v1 { 3,1,4   };
 	//auto ans = std::accumulate(std::next(v.begin()), v.end(), std::to_string(v[0]), [](std::string a, int b)
 	//	{
 	//		return a + "-" + std::to_string(b);
@@ -88,6 +88,10 @@ int main()
 	//ans.erase(std::remove(ans.begin(), ans.end(), '-'),ans.end());
 	//int arr[10]{ 1,-3,5,7,4,44,1,33,222,0 };
 	//std::cout << *std::min_element(arr, arr + 10
-	auto miss = std::mismatch(std::begin(v), std::end(v), std::begin(v1), std::end(v1));
-	std::cout << std::equal(std::begin(v), std::end(v), std::begin(v1),std::end(v1));
+	/*auto miss = std::mismatch(std::begin(v), std::end(v), std::begin(v1), std::end(v1));
+	std::cout << std::equal(std::begin(v), std::end(v), std::begin(v1),std::end(v1));*/
+	std::for_each(std::begin(v), std::end(v), [](int& a)
+		{
+			std::cout << a << '\n';
+		});
 }

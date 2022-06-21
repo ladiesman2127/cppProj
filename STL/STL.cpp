@@ -120,8 +120,7 @@ int main()
 	unord_set.emplace(0);
 	unord_set.emplace(4);
 	unord_set.emplace(16);
-	unord_set.hash_function();
-	for(auto el : unord_set)
+	for(auto &el : unord_set)
 	{
 		std::cout << el << " ";
 	}

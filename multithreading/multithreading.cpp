@@ -63,11 +63,14 @@ void print(int a)
 {
 	std::this_thread::sleep_for(std::chrono::hours(1));
 }
+
 int main()
 {
 	timer t;
+	std::recursive_mutex rm;
+	//atan2(3.2, 8.9);
 	//print('*');
-	print(2);
+	//print(2);
 	//std::thread th1(&print, '*');
 	//std::thread th2(&print, '#');
 	/*my_class m;
@@ -81,6 +84,6 @@ int main()
 	th.join();*/
 	//th1.join();
 	//th2.join();
-
+	return 0;
 
 }
