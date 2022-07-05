@@ -21,22 +21,21 @@ int* bubble_sort(int* arr, const int SIZE)
 //SELECTION SORT
 int* selection_sort(int* arr, const int SIZE)
 {
-	int min, index_of_min = 0;
+	int minIndex = 0;
 	for (int i = 0; i < SIZE; i++)
 	{
-		min = arr[i];
+		minIndex = i;
 		for (int j = i; j < SIZE; j++)
 		{
-			if (arr[j] < min)
+			if (arr[j] < arr[minIndex])
 			{
-				min = arr[j];
-				index_of_min = j;
+				minIndex = j;
 			}
 		}
-		std::swap(arr[index_of_min], arr[i]);
+		std::swap(arr[minIndex], arr[i]);
 	}
 	return arr;
-}
+}  
 
 
 //QUICK SORT
@@ -202,18 +201,7 @@ void shaker_sort(int* arr, const int SIZE)
 	}
 }
 
-void heap_sort(int* arr, const int SIZE)
-{
-	std::priority_queue<int> pr_q;
-	for (int i = 0; i < SIZE; ++i)
-	{
-		pr_q.emplace(arr[i]);
-	}
-	for(int i = 0;i < SIZE;++i)
-	{
-		
-	}
-}
+
 int main()
 {
 	const unsigned int start_time = clock();

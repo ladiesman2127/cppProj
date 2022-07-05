@@ -302,6 +302,14 @@ private:
 	brain brain;
 };
 
+int cache[100];
+int fib(int n)
+{
+	if (n <= 1) return n;
+	if (cache[n] == 0) cache[n] = fib(n - 1) + fib(n - 2);
+	return cache[n];
+}
+
 void hanoi(const int n, const int i, int k)
 {
 	if (n == 1)
@@ -317,8 +325,11 @@ void hanoi(const int n, const int i, int k)
 	}
 }
 
+
 int main()
 {
+	srand(time(NULL));
+	std::cout << rand() % 10;
 	/*setlocale(LC_ALL, "ru");
 	#pragma region Other
 myClass a(5);
@@ -386,6 +397,7 @@ std::cout << ap1.get_color() << " " << ap2.get_color() << '\n';
 	human1 hu;
 	hu.think();
 	return 0;*/
-	hanoi(3, 0, 1);
-
+	//hanoi(3, 0, 1);
+	//std::cout << fib(44);
+	
 }

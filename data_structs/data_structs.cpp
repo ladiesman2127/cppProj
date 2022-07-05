@@ -18,18 +18,20 @@ private:
 			this->ptr_next = ptr_next;
 		}
 	};
-	node* head; // head(main) node
-	int size;
+	node* head_; // head(main) node
+	int size_;
 public:
 	single_linked_list();
 	~single_linked_list();
+	void change_direction(node* start, node* end);
 	void push_back(T data);
 	void push_front(T data);
 	void pop_back(T data);
+	void reverse();
 	void pop_front();
 	void remove_at(int index);
 	void insert(T data, int index);
-	int get_size() const { return size; }
+	int get_size() const { return size_; }
 
 	void clear();
 	T& operator[](const int index);
@@ -38,14 +40,27 @@ public:
 template <class T>
 single_linked_list<T>::single_linked_list()
 {
-	size = 0;
-	head = nullptr;
+	size_ = 0;
+	head_ = nullptr;
 }
 
 template <class T>
 single_linked_list<T>::~single_linked_list()
 {
 	clear();
+}
+
+template <class T>
+void single_linked_list<T>::change_direction(node* start, node* end)
+{
+	if (end->ptr_next == nullptr)
+	{
+		head_ = end;
+		end->ptr_next = start;
+		return;
+	}
+	change_direction(end, end->ptr_next);
+	end->ptr_next = start;
 }
 
 template <class T>
@@ -57,13 +72,13 @@ void single_linked_list<T>::push_back(T data)
 	//В ином случае, создаем указатель типа Node,который изначально равен голове
 	//Если он равен нулю, присваиваем ему новую Nod'у
 	//Иначе просто перебираем все Nod'ы, пока не найдем последнюю
-	if(head == nullptr)
+	if(head_ == nullptr)
 	{
-		head = new node(data);
+		head_ = new node(data);
 	}
 	else
 	{
-		node* cur_node = this->head;
+		node* cur_node = this->head_;
 		while(cur_node->ptr_next != nullptr)
 		{
 			cur_node = cur_node->ptr_next;
@@ -71,27 +86,35 @@ void single_linked_list<T>::push_back(T data)
 		cur_node->ptr_next = new node(data);
 	}
 
-	size++; // Увеличиваем size после добавления элемента
+	size_++; // Увеличиваем size после добавления элемента
 }
 
 template <class T>
 void single_linked_list<T>::push_front(T data)
 {
-	head = new node(data, head);
-	size++;
+	head_ = new node(data, head_);
+	size_++;
 }
 
 template <class T>
 void single_linked_list<T>::pop_back(T data)
 {
-	node* cur_node = this->head;
+	node* cur_node = this->head_;
 
-	for(int i = 0; i < size - 1; i++)
+	for(int i = 0; i < size_ - 1; i++)
 	{
 		cur_node = cur_node->ptr_next;
 	}
 	delete cur_node->ptr_next;
 	cur_node->ptr_next = nullptr;
+}
+
+
+
+template <class T>
+void single_linked_list<T>::reverse()
+{
+	change_direction(head_, head_->ptr_next);
 }
 
 template <class T>
@@ -101,13 +124,13 @@ void single_linked_list<T>::insert(T data, int index)
 	{
 		push_front(data);
 	}
-	else if(index == size - 1)
+	else if(index == size_ - 1)
 	{
 		push_back(data);
 	}
 	else
 	{
-		node* previous = this->head;
+		node* previous = this->head_;
 		for(int i = 0; i < index - 1; i++)
 		{
 			previous = previous->ptr_next;
@@ -115,7 +138,7 @@ void single_linked_list<T>::insert(T data, int index)
 
 		node* new_node = new node(data, previous->ptr_next);
 		previous->ptr_next = new_node;
-		size++;
+		size_++;
 	}
 }
 
@@ -124,12 +147,12 @@ template <class T>
 void single_linked_list<T>::pop_front()
 {
 	//Запоминаем адресс головы
-	node* temp = head;
+	node* temp = head_;
 	//голову задаем за вторую ноду
-	head = head->ptr_next;
+	head_ = head_->ptr_next;
 	//удаляем данные с прежней головы
 	delete temp;
-	size--;
+	size_--;
 }
 
 template <class T>
@@ -139,13 +162,13 @@ void single_linked_list<T>::remove_at(int index)
 	{
 		pop_front();
 	}
-	else if(index == size - 1)
+	else if(index == size_ - 1)
 	{
 		pop_back();
 	}
 	else
 	{
-		node* cur_node = this->head;
+		node* cur_node = this->head_;
 		for(int i = 0; i < index - 1; i++)
 		{
 			cur_node = cur_node->ptr_next;
@@ -153,14 +176,14 @@ void single_linked_list<T>::remove_at(int index)
 		node* temp = cur_node->ptr_next;
 		cur_node->ptr_next = cur_node->ptr_next->ptr_next;
 		delete temp;
-		size--;
+		size_--;
 	}
 }
 
 template <class T>
 void single_linked_list<T>::clear()
 {
-	while(size)
+	while(size_)
 	{
 		pop_front();
 	}
@@ -170,7 +193,7 @@ template <class T>
 T& single_linked_list<T>::operator[](const int index)
 {
 	int cur_index = 0;
-	node* cur_node = this->head;
+	node* cur_node = this->head_;
 	while(cur_node != nullptr)
 	{
 		if(cur_index == index)
@@ -178,7 +201,6 @@ T& single_linked_list<T>::operator[](const int index)
 		cur_index++;
 		cur_node = cur_node->ptr_next;
 	}
-	return {};
 }
 
 #pragma endregion
@@ -210,6 +232,7 @@ public:
 	~double_linked_list();
 	T& operator[](int index);
 	int get_size() const { return size; }
+	void reverse();
 	void push_back(T data);
 	void push_front(T data);
 	void pop_back();
@@ -231,6 +254,30 @@ template <class T> //done
 double_linked_list<T>::~double_linked_list()
 {
 	clear();
+}
+
+template <class T>
+void double_linked_list<T>::reverse()
+{
+	/*node* current = this->head_;
+	tail_ = head_;
+	node* temp = nullptr;
+	while(current != nullptr)
+	{
+		temp = current;
+		std::swap(current->ptr_next, current->ptr_prev);
+		current = current->ptr_prev;
+	}
+	head_ = temp;*/
+	node* current = this->head_;
+	tail_         = this->head_;
+	while(current != nullptr)
+	{
+		if (current->ptr_next == nullptr)
+			head_ = current;
+		std::swap(current->ptr_next, current->ptr_prev);
+		current = current->ptr_prev; // 
+	}
 }
 
 template <class T> //done
@@ -558,6 +605,16 @@ int main()
 	my_tree.add(143);
 	std::cout << my_tree.is_contain(-2);*/
 #pragma endregion
-
+	single_linked_list<int> list;
+	list.push_back(3);
+	list.push_back(12);
+	list.push_back(-8);
+	list.push_back(9);
+	list.push_back(12);
+	list.reverse();
+	for(int i = 0; i < list.get_size();++i)
+	{
+		std::cout << list[i] << " ";
+	}
 	return 0;
 }
