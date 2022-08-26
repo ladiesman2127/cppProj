@@ -8,7 +8,70 @@
 #include <numeric>
 #include <string>
 
+int edit_distance(const std::string& a, const std::string& b)
+{
+	const int n = a.length();
+	const int m = b.length();
+	std::vector<std::vector<int> > D(n, std::vector<int>(m));
+	for (int i = 0; i < n; ++i)
+		D[i][0] = i;
+	for (int j = 0; j < m; ++j)
+		D[0][j] = j;
 
+	for (int i = 1; i < n; ++i)
+	{
+		for (int j = 1; j < m; ++j)
+		{
+			int c = a[i - 1] == b[j - 1] ? 0 : 1;
+			D[i][j] = std::min(D[i - 1][j] + 1, std::min(D[i][j - 1] + 1, D[i - 1][j - 1] + c));
+		}
+	}
+	return D[n - 1][m - 1];
+}
+
+int knapsack_with_reps_BU(const int W, const std::vector<int>& weight, const std::vector<int> cost)
+{
+	int* d = new int[W + 1] {};
+	for (int w = 1; w < W + 1; ++w)
+	{
+		for (int i = 0; i < weight.size(); ++i)
+		{
+			if (weight[i] <= w)
+			{
+				d[w] = std::max(d[w], d[w - weight[i]] + cost[i]);
+			}
+		}
+	}
+	const int result = d[W];
+	delete[] d;
+	return result;
+}
+
+int knapsack_without_reps_BU(const int& W,const int& n, const std::vector<int>& weights)
+{
+
+	int** d = new int* [W + 1];
+	for (int i = 0; i < W + 1; ++i)
+		d[i] = new int[n + 1];
+	for (int w = 0; w < W + 1; ++w)
+		d[w][0] = 0;
+	for (int i = 0; i < n + 1; ++i)
+		d[0][i] = 0;
+	for (int i = 1; i < n + 1; ++i)
+	{
+		for (int w = 1; w < W + 1; ++w)
+		{
+			d[w][i] = d[w][i - 1];
+			if (weights[i - 1] <= w)
+				d[w][i] = std::max(d[w][i], d[w - weights[i - 1]][i - 1] + weights[i - 1]);
+		}
+	}
+	const int result =  d[W][n];
+	for (int i = 0; i < W + 1; ++i)
+		delete[] d[i];
+	delete[] d;
+	return result;
+}
 
 class person
 {
@@ -78,20 +141,24 @@ int main()
 						}
 						*/
 
-	std::vector<int>     v  { 1,2,4,3 };
-	//std::vector<int>     v1 { 3,1,4   };
-	//auto ans = std::accumulate(std::next(v.begin()), v.end(), std::to_string(v[0]), [](std::string a, int b)
-	//	{
-	//		return a + "-" + std::to_string(b);
+						/*std::vector<int>     v  { 1,2,4,3 };*/
+						//std::vector<int>     v1 { 3,1,4   };
+						//auto ans = std::accumulate(std::next(v.begin()), v.end(), std::to_string(v[0]), [](std::string a, int b)
+						//	{
+						//		return a + "-" + std::to_string(b);
 
-	//	});
-	//ans.erase(std::remove(ans.begin(), ans.end(), '-'),ans.end());
-	//int arr[10]{ 1,-3,5,7,4,44,1,33,222,0 };
-	//std::cout << *std::min_element(arr, arr + 10
-	/*auto miss = std::mismatch(std::begin(v), std::end(v), std::begin(v1), std::end(v1));
-	std::cout << std::equal(std::begin(v), std::end(v), std::begin(v1),std::end(v1));*/
-	std::for_each(std::begin(v), std::end(v), [](int& a)
-		{
-			std::cout << a << '\n';
-		});
+						//	});
+						//ans.erase(std::remove(ans.begin(), ans.end(), '-'),ans.end());
+						//int arr[10]{ 1,-3,5,7,4,44,1,33,222,0 };
+						//std::cout << *std::min_element(arr, arr + 10
+						/*auto miss = std::mismatch(std::begin(v), std::end(v), std::begin(v1), std::end(v1));
+						std::cout << std::equal(std::begin(v), std::end(v), std::begin(v1),std::end(v1));*/
+						//std::for_each(std::begin(v), std::end(v), [](int& a)
+						//	{
+						//		std::cout << a << '\n';
+						//	});
+	int w = 10;
+	std::vector<int> weight{ 6,3,4,2 };
+	std::vector<int> cos{ 30,14,16,9 };
+	std::cout << knapsack_without_reps_BU(w, weight, cos);
 }

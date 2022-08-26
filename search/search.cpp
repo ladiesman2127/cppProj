@@ -22,7 +22,7 @@ int binary_search(const int* arr, int size, const int guess)
 			low = mid + 1;
 		}
 	}
-	return NULL;
+	return -1;
 }
 
 int main()
